@@ -24,8 +24,9 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 1,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
@@ -76,7 +77,6 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
-        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -88,7 +88,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "datasource": {
@@ -153,12 +153,6 @@
       "id": 32,
       "options": {
         "displayMode": "basic",
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
         "maxVizHeight": 300,
         "minVizHeight": 16,
         "minVizWidth": 8,
@@ -175,7 +169,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "datasource": {
@@ -276,7 +270,6 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
-        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -289,7 +282,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "datasource": {
@@ -345,12 +338,6 @@
       "id": 33,
       "options": {
         "displayMode": "lcd",
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
         "maxVizHeight": 300,
         "minVizHeight": 16,
         "minVizWidth": 8,
@@ -367,7 +354,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "datasource": {
@@ -451,7 +438,6 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
-        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -464,7 +450,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "datasource": {
@@ -515,7 +501,6 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
-        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -527,7 +512,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "datasource": {
@@ -548,7 +533,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -563,7 +548,6 @@
             "filterable": true,
             "inspect": false
           },
-          "fieldMinMax": false,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -571,40 +555,20 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
-          },
-          "unit": "none"
+          }
         },
         "overrides": [
           {
             "matcher": {
               "id": "byName",
-              "options": "physicalSizeByte"
+              "options": "GPU card 紀錄最高溫度"
             },
             "properties": [
               {
                 "id": "unit",
-                "value": "decbytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Health (%)"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "gradient",
-                  "type": "color-background"
-                }
+                "value": "celsius"
               },
               {
                 "id": "thresholds",
@@ -616,18 +580,20 @@
                       "value": null
                     },
                     {
-                      "color": "dark-red",
+                      "color": "yellow",
+                      "value": 70
+                    },
+                    {
+                      "color": "red",
                       "value": 80
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": 90
-                    },
-                    {
-                      "color": "dark-green",
-                      "value": 100
                     }
                   ]
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
                 }
               }
             ]
@@ -635,12 +601,38 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Row"
+              "options": "Phison aiDAPTIV 紀錄最高溫度"
             },
             "properties": [
               {
-                "id": "custom.width",
-                "value": 50
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 70
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
               }
             ]
           },
@@ -670,24 +662,28 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Disk Size"
+              "options": "GPU avg utilization"
             },
             "properties": [
               {
-                "id": "custom.width",
-                "value": 110
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "decimals",
+                "value": 2
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "PowerOn Hours"
+              "options": "Num"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 109
+                "value": 50
               }
             ]
           }
@@ -699,71 +695,218 @@
         "x": 3,
         "y": 6
       },
-      "id": 4,
+      "id": 18,
       "options": {
         "cellHeight": "sm",
         "footer": {
           "countRows": false,
-          "fields": [],
+          "enablePagination": false,
+          "fields": "",
           "reducer": [
             "sum"
           ],
           "show": false
         },
-        "showHeader": true,
-        "sortBy": []
+        "frameIndex": 1,
+        "showHeader": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "nvme_poweron_hours{instance=~\"$instance.*\", firmware=~\"EIFZ.*\"}",
+          "expr": "max(nvidia_gpu_power_limit{instance=~\"$instance.*\"}) by (node, nvDriver, instance, cardName)",
           "format": "table",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "range": false,
           "refId": "A"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "(1-nvme_percent_used{instance=~\"$instance.*\", firmware=~\"EIFZ.*\"})*100",
+          "expr": "count(nvidia_gpu_power_limit{instance=~\"$instance.*\"}) by (node, nvDriver, instance, cardName)",
           "format": "table",
           "hide": false,
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
           "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "max(nvidia_gpu_temperature{instance=~\"$instance.*\"}) by (node, nvDriver, instance, cardName)",
+          "format": "table",
+          "hide": true,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "max(nvme_temperature{instance=~\"$instance.*\", firmware=~\"EIFZ.*\"}) by (node, nvDriver, instance, cardName)",
+          "format": "table",
+          "hide": true,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "count(nvme_temperature{instance=~\"$instance.*\", firmware=~\"EIFZ.*\"}) by (node, nvDriver, instance, cardName)",
+          "format": "table",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "count by (node, nvDriver, instance, cardName) (nvidia_gpu_available{instance=~\"$instance.*\"} == 1) or vector(0)",
+          "format": "table",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "avg by (node, nvDriver, instance, cardName) (avg_over_time(nvidia_gpu_utilization_by_card{instance=~\"$instance.*\", cardMinor=~\"$gpu\"}[$__range]))",
+          "format": "table",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "G"
         }
       ],
-      "title": "aiDAPTIVCache Information",
+      "title": "Phison aiDAPTIV & GPU 資訊",
       "transformations": [
         {
           "id": "joinByField",
           "options": {
-            "byField": "serialNumber",
+            "byField": "instance",
             "mode": "inner"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time 1": true,
+              "Time 2": true,
+              "Time 3": true,
+              "Time 4": true,
+              "Time 5": true,
+              "Value #A": true,
+              "Value #F": false,
+              "cardName 2": true,
+              "cardName 3": true,
+              "cardName 4": true,
+              "instance": false,
+              "instance 2": true,
+              "instance 3": true,
+              "instance 4": true,
+              "instance 5": true,
+              "node 1": false,
+              "node 2": true,
+              "node 3": true,
+              "node 4": true,
+              "node 5": true,
+              "nvDriver 2": true,
+              "nvDriver 3": true,
+              "nvDriver 4": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "StdDev": 9,
+              "Time 1": 4,
+              "Time 2": 5,
+              "Time 3": 13,
+              "Time 4": 16,
+              "Time 5": 21,
+              "Value #A": 11,
+              "Value #B": 8,
+              "Value #E": 15,
+              "Value #F": 20,
+              "Value #G": 7,
+              "cardName 1": 2,
+              "cardName 2": 10,
+              "cardName 3": 17,
+              "cardName 4": 22,
+              "instance": 1,
+              "node 1": 0,
+              "node 2": 12,
+              "node 3": 14,
+              "node 4": 18,
+              "node 5": 23,
+              "nvDriver 1": 3,
+              "nvDriver 2": 6,
+              "nvDriver 3": 19,
+              "nvDriver 4": 24
+            },
+            "renameByName": {
+              "StdDev": "GPU Card 閒置數量",
+              "Value #B": "GPU Card 總數量",
+              "Value #C": "GPU card 紀錄最高溫度",
+              "Value #D": "Phison aiDAPTIV 紀錄最高溫度",
+              "Value #E": "Phison aiDAPTIV 數量",
+              "Value #F": "GPU Card 使用數量",
+              "Value #G": "GPU avg utilization",
+              "cardName 1": "Card Name",
+              "instance": "IP",
+              "instance 1": "IP",
+              "node": "Node Name",
+              "node 1": "Node Name",
+              "nvDriver 1": "Nvidia Driver Version"
+            }
           }
         },
         {
           "id": "calculateField",
           "options": {
-            "index": {
-              "asPercentile": false
+            "alias": "GPU Card 閒置數量",
+            "binary": {
+              "left": "GPU Card 總數量",
+              "operator": "-",
+              "right": "GPU Card 使用數量"
             },
-            "mode": "index",
+            "mode": "binary",
             "reduce": {
-              "reducer": "sum"
+              "include": [],
+              "reducer": "stdDev"
             }
           }
         },
@@ -779,73 +922,34 @@
           }
         },
         {
+          "id": "calculateField",
+          "options": {
+            "alias": "Num",
+            "mode": "index",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
-              "Time": true,
-              "Time 1": true,
-              "Time 2": true,
-              "__name__": true,
-              "__name__ 1": true,
-              "__name__ 2": true,
-              "devicePath 2": true,
-              "firmware 2": true,
-              "instance 2": true,
-              "job": true,
-              "job 1": true,
-              "job 2": true,
-              "modelNumber 2": true,
-              "node 2": true,
-              "physicalSizeByte 2": true,
-              "productName": true,
-              "productName 1": true,
-              "productName 2": true,
-              "serialNumber 2": true
+              "GPU Card 使用數量": true
             },
             "includeByName": {},
             "indexByName": {
-              "Row": 0,
-              "Time 1": 10,
-              "Time 2": 14,
-              "Value #A": 8,
-              "Value #B": 9,
-              "__name__": 11,
-              "devicePath 1": 3,
-              "devicePath 2": 15,
-              "firmware 1": 4,
-              "firmware 2": 16,
-              "instance 1": 2,
-              "instance 2": 17,
-              "job 1": 12,
-              "job 2": 18,
-              "modelNumber 1": 5,
-              "modelNumber 2": 19,
-              "node 1": 1,
-              "node 2": 20,
-              "physicalSizeByte 1": 7,
-              "physicalSizeByte 2": 21,
-              "productName 1": 13,
-              "productName 2": 22,
-              "serialNumber": 6
+              "Card Name": 3,
+              "GPU Card 總數量": 6,
+              "GPU Card 閒置數量": 7,
+              "GPU avg utilization": 5,
+              "IP": 2,
+              "Node Name": 1,
+              "Num": 0,
+              "Nvidia Driver Version": 4,
+              "Phison aiDAPTIV 數量": 8
             },
-            "renameByName": {
-              "Row": "Num",
-              "Value #A": "PowerOn Hours",
-              "Value #B": "Health (%)",
-              "devicePath": "Device Path",
-              "devicePath 1": "Device Path",
-              "firmware": "Firmware revisionFirmware revision",
-              "firmware 1": "Firware",
-              "instance": "IP",
-              "instance 1": "IP",
-              "modelNumber": "Model Number",
-              "modelNumber 1": "Model Number",
-              "node": "Node Name",
-              "node 1": "Node Name",
-              "physicalSizeByte": "Disk Size",
-              "physicalSizeByte 1": "Disk Size",
-              "serialNumber": "Serial"
-            }
+            "renameByName": {}
           }
         }
       ],
@@ -892,7 +996,6 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
-        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -904,7 +1007,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "10.4.2",
       "targets": [
         {
           "datasource": {
@@ -923,7 +1026,7 @@
       "type": "stat"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -931,113 +1034,391 @@
         "y": 16
       },
       "id": 25,
-      "panels": [],
-      "title": "Phison aiDAPTIVCache",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "left",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 11,
-        "w": 24,
-        "x": 0,
-        "y": 17
-      },
-      "id": 1,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "hidden",
-          "placement": "right",
-          "showLegend": false
-        },
-        "timezone": [
-          "Asia/Taipei"
-        ],
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.3.0",
-      "targets": [
+      "panels": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "nvme_temperature{instance=~\"$instance.*\", firmware=~\"EIFZ.*\"}",
-          "instant": false,
-          "legendFormat": "{{node}}-{{devicePath}}",
-          "range": true,
-          "refId": "A"
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "left",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 24,
+            "x": 0,
+            "y": 17
+          },
+          "id": 1,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "hidden",
+              "placement": "right",
+              "showLegend": false
+            },
+            "timezone": [
+              "Asia/Taipei"
+            ],
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "nvme_temperature{instance=~\"$instance.*\", firmware=~\"EIFZ.*\"}",
+              "instant": false,
+              "legendFormat": "{{node}}-{{devicePath}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "aiDAPTIVCache Temperature",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": false
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "physicalSizeByte"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "decbytes"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Health (%)"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "gradient",
+                      "type": "color-background"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green"
+                        },
+                        {
+                          "color": "dark-red",
+                          "value": 80
+                        },
+                        {
+                          "color": "#EAB839",
+                          "value": 90
+                        },
+                        {
+                          "color": "dark-green",
+                          "value": 100
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Row"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 50
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "IP"
+                },
+                "properties": [
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "pattern": "([^:]+)(:.*)?$",
+                          "result": {
+                            "index": 0,
+                            "text": "$1"
+                          }
+                        },
+                        "type": "regex"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 24,
+            "x": 0,
+            "y": 28
+          },
+          "id": 4,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": [],
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "10.4.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "nvme_poweron_hours{instance=~\"$instance.*\", firmware=~\"EIFZ.*\"}",
+              "format": "table",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "(1-nvme_percent_used{instance=~\"$instance.*\", firmware=~\"EIFZ.*\"})*100",
+              "format": "table",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "aiDAPTIVCache Information",
+          "transformations": [
+            {
+              "id": "joinByField",
+              "options": {
+                "byField": "serialNumber",
+                "mode": "inner"
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "index": {
+                  "asPercentile": false
+                },
+                "mode": "index",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "sortBy",
+              "options": {
+                "fields": {},
+                "sort": [
+                  {
+                    "field": "IP"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true,
+                  "Time 1": true,
+                  "Time 2": true,
+                  "__name__": true,
+                  "__name__ 1": true,
+                  "__name__ 2": true,
+                  "devicePath 2": true,
+                  "firmware 2": true,
+                  "instance 2": true,
+                  "job": true,
+                  "job 1": true,
+                  "job 2": true,
+                  "modelNumber 2": true,
+                  "node 2": true,
+                  "physicalSizeByte 2": true,
+                  "productName": true,
+                  "productName 1": true,
+                  "productName 2": true,
+                  "serialNumber 2": true
+                },
+                "includeByName": {},
+                "indexByName": {
+                  "Row": 0,
+                  "Time 1": 10,
+                  "Time 2": 14,
+                  "Value #A": 8,
+                  "Value #B": 9,
+                  "__name__": 11,
+                  "devicePath 1": 3,
+                  "devicePath 2": 15,
+                  "firmware 1": 4,
+                  "firmware 2": 16,
+                  "instance 1": 2,
+                  "instance 2": 17,
+                  "job 1": 12,
+                  "job 2": 18,
+                  "modelNumber 1": 5,
+                  "modelNumber 2": 19,
+                  "node 1": 1,
+                  "node 2": 20,
+                  "physicalSizeByte 1": 7,
+                  "physicalSizeByte 2": 21,
+                  "productName 1": 13,
+                  "productName 2": 22,
+                  "serialNumber": 6
+                },
+                "renameByName": {
+                  "Row": "Num",
+                  "Value #A": "PowerOn Hours",
+                  "Value #B": "Health (%)",
+                  "devicePath": "Device Path",
+                  "devicePath 1": "Device Path",
+                  "firmware": "Firmware revisionFirmware revision",
+                  "firmware 1": "Firware",
+                  "instance": "IP",
+                  "instance 1": "IP",
+                  "modelNumber": "Model Number",
+                  "modelNumber 1": "Model Number",
+                  "node": "Node Name",
+                  "node 1": "Node Name",
+                  "physicalSizeByte": "Disk Size",
+                  "physicalSizeByte 1": "Disk Size",
+                  "serialNumber": "Serial"
+                }
+              }
+            }
+          ],
+          "type": "table"
         }
       ],
-      "title": "aiDAPTIVCache Temperature",
-      "type": "timeseries"
+      "title": "Phison aiDAPTIVCache",
+      "type": "row"
     },
     {
       "collapsed": true,
@@ -1045,7 +1426,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 17
       },
       "id": 24,
       "panels": [
@@ -1101,7 +1482,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1117,7 +1499,7 @@
             "h": 11,
             "w": 12,
             "x": 0,
-            "y": 41
+            "y": 18
           },
           "id": 2,
           "options": {
@@ -1204,7 +1586,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1220,7 +1603,7 @@
             "h": 11,
             "w": 12,
             "x": 12,
-            "y": 41
+            "y": 18
           },
           "id": 14,
           "options": {
@@ -1300,7 +1683,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1316,7 +1700,7 @@
             "h": 12,
             "w": 12,
             "x": 0,
-            "y": 52
+            "y": 29
           },
           "id": 23,
           "options": {
@@ -1397,7 +1781,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1413,7 +1798,7 @@
             "h": 12,
             "w": 12,
             "x": 12,
-            "y": 52
+            "y": 29
           },
           "id": 10,
           "options": {
@@ -1472,7 +1857,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1587,7 +1973,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 64
+            "y": 41
           },
           "id": 20,
           "options": {
@@ -1749,9 +2135,8 @@
       "type": "row"
     }
   ],
-  "preload": false,
   "refresh": "30s",
-  "schemaVersion": 40,
+  "schemaVersion": 39,
   "tags": [
     "nvidia"
   ],
@@ -1759,19 +2144,25 @@
     "list": [
       {
         "current": {
+          "selected": false,
           "text": "Prometheus",
           "value": "PBFA97CFB590B2093"
         },
+        "hide": 0,
         "includeAll": false,
+        "multi": false,
         "name": "datasource",
         "options": [],
         "query": "prometheus",
+        "queryValue": "",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "type": "datasource"
       },
       {
         "current": {
+          "selected": true,
           "text": [
             "All"
           ],
@@ -1784,6 +2175,7 @@
           "uid": "${datasource}"
         },
         "definition": "label_values(nvidia_gpu_info,instance)",
+        "hide": 0,
         "includeAll": true,
         "multi": true,
         "name": "instance",
@@ -1795,11 +2187,13 @@
         },
         "refresh": 1,
         "regex": "([^:]+)(:.*)?$",
+        "skipUrlSync": false,
         "sort": 7,
         "type": "query"
       },
       {
         "current": {
+          "selected": false,
           "text": [
             "All"
           ],
@@ -1812,6 +2206,7 @@
           "uid": "${datasource}"
         },
         "definition": "label_values(nvidia_gpu_info,cardMinor)",
+        "hide": 0,
         "includeAll": true,
         "multi": true,
         "name": "gpu",
@@ -1823,6 +2218,7 @@
         },
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       }
@@ -1836,6 +2232,6 @@
   "timezone": "",
   "title": "Phison Ai100 & Nvidia GPU",
   "uid": "gFZKr2xIk",
-  "version": 15,
+  "version": 134,
   "weekStart": ""
 }
