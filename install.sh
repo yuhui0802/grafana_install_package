@@ -12,10 +12,9 @@ fi
 
 #### Grafana Related
 GRAFANA_LISTEN_PORT_ON_HOST=3000
-VERSION_TAG=GIP_1.2.0
-GRAFANA_DOWNLOAD_LINK="https://github.com/phison-dev/grafana_install_package_v2/releases/download/$VERSION_TAG/grafana.tar"
-OTEL_DOWNLOAD_LINK="https://github.com/phison-dev/grafana_install_package_v2/releases/download/$VERSION_TAG/otel.tar"
-TEMPO_DOWNLOAD_LINK="https://github.com/phison-dev/grafana_install_package_v2/releases/download/$VERSION_TAG/tempo.tar"
+GRAFANA_DOWNLOAD_LINK="https://github.com/phison-dev/grafana_install_package_v2/releases/download/GIP_1.0.1/grafana.tar"
+OTEL_DOWNLOAD_LINK="https://github.com/phison-dev/grafana_install_package_v2/releases/download/GIP_1.0.1/otel.tar"
+TEMPO_DOWNLOAD_LINK="https://github.com/phison-dev/grafana_install_package_v2/releases/download/GIP_1.0.1/tempo.tar"
 
 #### Docker configure
 DOCKER_NETWORK="phison-network"
@@ -202,9 +201,9 @@ function uninstall() {
 }
 
 function download_package(){
-	wget $GRAFANA_DOWNLOAD_LINK -O grafana.tar
-	wget $TEMPO_DOWNLOAD_LINK -O tempo.tar
-	wget $OTEL_DOWNLOAD_LINK -O otel.tar
+	wget $GRAFANA_DOWNLOAD_LINK
+	wget $TEMPO_DOWNLOAD_LINK
+	wget $OTEL_DOWNLOAD_LINK
 	LOG "info" "Finish download Grafana-related image"
 }
 
